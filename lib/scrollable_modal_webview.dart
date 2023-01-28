@@ -13,7 +13,7 @@ void showScrollableModalWebView({
   PreferredSizeWidget? header,
   bool scrollable = true,
   double initialChildSize = 1.0,
-  double radius = 10.0,
+  ShapeBorder? shape,
 }) {
   if (!(Platform.isIOS || Platform.isAndroid)) {
     throw Exception('This OS is not supported');
@@ -21,6 +21,7 @@ void showScrollableModalWebView({
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
+    shape: shape,
     builder: (BuildContext context) => const ScrollableModalWebView(),
   );
 }

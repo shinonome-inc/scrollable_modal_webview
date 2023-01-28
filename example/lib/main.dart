@@ -46,6 +46,9 @@ class _MyHomePageState extends State<MyHomePage> {
             context: context,
             controller: controller,
             url: 'https://flutter.dev/',
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
           ),
         ),
       ),
