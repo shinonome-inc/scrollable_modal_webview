@@ -5,11 +5,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+/// Shows a scrollable modal WebView.
 void showScrollableModalWebView({
-  /// Shows a scrollable modal WebView.
+  required BuildContext context,
   required WebViewController controller,
   required String url,
-  required BuildContext context,
   PreferredSizeWidget? header,
   bool scrollable = true,
   double initialChildSize = 1.0,
@@ -20,6 +20,7 @@ void showScrollableModalWebView({
   }
   showModalBottomSheet(
     context: context,
+    isScrollControlled: true,
     builder: (BuildContext context) => const ScrollableModalWebView(),
   );
 }
