@@ -1,6 +1,30 @@
 library scrollable_modal_webview;
 
-import 'package:flutter/widgets.dart';
+import 'dart:io';
+
+import 'package:flutter/material.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+
+/// Shows a scrollable modal WebView.
+void showScrollableModalWebView({
+  required BuildContext context,
+  required WebViewController controller,
+  required String url,
+  PreferredSizeWidget? header,
+  bool scrollable = true,
+  double initialChildSize = 1.0,
+  ShapeBorder? shape,
+}) {
+  if (!(Platform.isIOS || Platform.isAndroid)) {
+    throw Exception('This OS is not supported');
+  }
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    shape: shape,
+    builder: (BuildContext context) => const ScrollableModalWebView(),
+  );
+}
 
 class ScrollableModalWebView extends StatefulWidget {
   const ScrollableModalWebView({super.key});
