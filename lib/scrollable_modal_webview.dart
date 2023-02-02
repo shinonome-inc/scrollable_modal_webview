@@ -59,7 +59,7 @@ class ScrollableModalBottomSheet extends StatelessWidget {
                   child: SingleChildScrollView(
                 physics:
                     scrollable ? null : const NeverScrollableScrollPhysics(),
-                child: const ScrollableModalWebView(),
+                child: ModalWebView(controller: controller, url: url),
               ))
             ],
           );
@@ -67,16 +67,58 @@ class ScrollableModalBottomSheet extends StatelessWidget {
   }
 }
 
-class ScrollableModalWebView extends StatefulWidget {
-  const ScrollableModalWebView({super.key});
+class ModalWebView extends StatefulWidget {
+  /// Creates a widget that show WebView in Modal Bottom Sheet.
+  const ModalWebView({
+    Key? key,
+    required this.controller,
+    required this.url,
+  }) : super(key: key);
+  final WebViewController controller;
+  final String url;
 
   @override
-  State<ScrollableModalWebView> createState() => _ScrollableModalWebViewState();
+  State<ModalWebView> createState() => _ModalWebViewState();
 }
 
-class _ScrollableModalWebViewState extends State<ScrollableModalWebView> {
+class _ModalWebViewState extends State<ModalWebView> {
+  late WebViewController _controller;
+  double _webViewHeight = 0;
+
+  Future<void> _calculateWebViewHeight() async {
+    const String javaScript = 'document.documentElement.scrollHeight;';
+    final result = await _controller.runJavaScriptReturningResult(javaScript);
+    final double height = double.parse(result.toString());
+    setState(() {
+      _webViewHeight = height;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    final WebViewController controller = widget.controller;
+    controller
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onPageFinished: (url) {
+            _calculateWebViewHeight();
+          },
+        ),
+      )
+      ..loadRequest(Uri.parse(widget.url));
+    _controller = controller;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    final double deviceKeyBordHeight = MediaQuery.of(context).viewInsets.bottom;
+    return SizedBox(
+      height: _webViewHeight + deviceKeyBordHeight,
+      child: WebViewWidget(
+        controller: _controller,
+      ),
+    );
   }
 }

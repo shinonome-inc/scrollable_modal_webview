@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               controller: controller,
-              initialChildSize: 1.0,
+              initialChildSize: 0.96,
               url: 'https://flutter.dev/',
               shape: const RoundedRectangleBorder(
                   borderRadius:
