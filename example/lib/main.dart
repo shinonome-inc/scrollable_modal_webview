@@ -43,13 +43,24 @@ class _MyHomePageState extends State<MyHomePage> {
         child: TextButton(
           child: const Text("display showScrollableModalWebView"),
           onPressed: () => showScrollableModalWebView(
-            context: context,
-            controller: controller,
-            url: 'https://flutter.dev/',
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-          ),
+              context: context,
+              header: Container(
+                height: 30,
+                decoration: const BoxDecoration(
+                  borderRadius:
+                      BorderRadius.vertical(top: Radius.circular(10.0)),
+                  color: Colors.blue,
+                ),
+                child: const Center(
+                  child: Text('ScrollableModalBottomSheet'),
+                ),
+              ),
+              controller: controller,
+              initialChildSize: 1.0,
+              url: 'https://flutter.dev/',
+              shape: const RoundedRectangleBorder(
+                  borderRadius:
+                      BorderRadius.vertical(top: Radius.circular(10.0)))),
         ),
       ),
     );
