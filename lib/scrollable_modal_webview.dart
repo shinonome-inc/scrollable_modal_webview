@@ -13,7 +13,8 @@ void showScrollableModalWebView({
   Widget? header,
   bool scrollable = true,
   double initialChildSize = 1.0,
-  ShapeBorder? shape,
+  BorderRadiusGeometry? borderRadius,
+  Color? headerColor,
 }) {
   if (!(Platform.isIOS || Platform.isAndroid)) {
     throw Exception('This OS is not supported');
@@ -21,13 +22,17 @@ void showScrollableModalWebView({
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
-    shape: shape,
+    shape: RoundedRectangleBorder(
+        borderRadius: borderRadius ??
+            const BorderRadius.vertical(top: Radius.circular(0))),
     builder: (BuildContext context) => ScrollableModalBottomSheet(
       controller: controller,
       initialChildSize: initialChildSize,
       scrollable: scrollable,
       url: url,
       header: header,
+      headerColor: headerColor,
+      borderRadius: borderRadius,
     ),
   );
 }
@@ -38,13 +43,17 @@ class ScrollableModalBottomSheet extends StatelessWidget {
   final double initialChildSize;
   final bool scrollable;
   final String url;
+  final Color? headerColor;
+  final BorderRadiusGeometry? borderRadius;
   const ScrollableModalBottomSheet(
       {Key? key,
       required this.controller,
       this.header,
       required this.initialChildSize,
       required this.scrollable,
-      required this.url})
+      required this.url,
+      this.headerColor,
+      this.borderRadius})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -54,7 +63,16 @@ class ScrollableModalBottomSheet extends StatelessWidget {
         builder: (context, scrollController) {
           return Column(
             children: [
-              if (header != null) header!,
+              if (header != null) ...{
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: borderRadius,
+                    color: headerColor,
+                  ),
+                  height: MediaQuery.of(context).padding.bottom,
+                ),
+                header!,
+              },
               Expanded(
                   child: SingleChildScrollView(
                 physics:
