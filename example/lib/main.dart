@@ -45,21 +45,20 @@ class _MyHomePageState extends State<MyHomePage> {
           onPressed: () => showScrollableModalWebView(
             context: context,
             header: Container(
-              height: 50,
+              height: 30,
               decoration: const BoxDecoration(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(10.0)),
                 color: Colors.blue,
               ),
               child: const Center(
                 child: Text('ScrollableModalBottomSheet'),
               ),
             ),
+            headerColor: Colors.blue,
             controller: controller,
-            initialChildSize: 0.85,
+            initialChildSize: 1.0,
             url: 'https://flutter.dev/',
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
+            borderRadius:
+                const BorderRadius.vertical(top: Radius.circular(10.0)),
           ),
         ),
       ),
