@@ -47,20 +47,19 @@ class _MyHomePageState extends State<MyHomePage> {
               header: Container(
                 height: 30,
                 decoration: const BoxDecoration(
-                  borderRadius:
-                      BorderRadius.vertical(top: Radius.circular(10.0)),
                   color: Colors.blue,
                 ),
                 child: const Center(
                   child: Text('ScrollableModalBottomSheet'),
                 ),
               ),
+              backgroundColor: Colors.blue,
               controller: controller,
               initialChildSize: 1.0,
               url: 'https://flutter.dev/',
               shape: const RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.vertical(top: Radius.circular(10.0)))),
+                borderRadius: BorderRadius.vertical(top: Radius.circular(10.0)),
+              )),
         ),
       ),
     );
