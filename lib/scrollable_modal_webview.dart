@@ -43,6 +43,8 @@ class ScrollableModalBottomSheet extends StatelessWidget {
   final bool scrollable;
   final String url;
   final double statusBarHeight;
+
+  /// this class is ui component of scrollable modal bottom sheet.
   const ScrollableModalBottomSheet({
     Key? key,
     required this.controller,
