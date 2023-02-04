@@ -57,15 +57,15 @@ class ScrollableModalBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double deviceHeight = MediaQuery.of(context).size.height;
+    final bool safeAreaZone = initialChildSize >=
+        1.0 * (deviceHeight - statusBarHeight) / deviceHeight;
     return DraggableScrollableSheet(
         expand: false,
         initialChildSize: initialChildSize,
         builder: (context, scrollController) {
           return Column(
             children: [
-              if (initialChildSize >=
-                  1.0 * (deviceHeight - statusBarHeight) / deviceHeight)
-                SizedBox(height: statusBarHeight),
+              if (safeAreaZone) SizedBox(height: statusBarHeight),
               if (header != null) header!,
               Expanded(
                 child: Container(
