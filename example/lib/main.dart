@@ -45,8 +45,18 @@ class _MyHomePageState extends State<MyHomePage> {
           TextButton(
             child: const Text(
                 "display showScrollableModalWebView (has a header and a safeArea)"),
+            // [context] is BuildContext of build method.
+            // if [scrollable] is true, you can scroll webView.
+            // if you want header in modal, you write Widget type in [header].
+            // if safeArea exists in modal, you write [backgroundColor] as safeArea color.
+            // [controller] is controller of webView.
+            // [url] is url of the website to display in the webView.
+            // [shape] is border radius of safeArea.
+            // [initialChildSize] indicates what percentage of the full screen height the height of the modal represents.
+            // Please specify [initialChildSize] within the range of 0.0 to 1.0.
             onPressed: () => showScrollableModalWebView(
                 context: context,
+                scrollable: true,
                 header: Container(
                   height: 30,
                   decoration: const BoxDecoration(
@@ -71,6 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 "display showScrollableModalWebView (has a header but don't have a safeArea)"),
             onPressed: () => showScrollableModalWebView(
                 context: context,
+                scrollable: true,
                 header: Container(
                   height: 30,
                   decoration: const BoxDecoration(
@@ -96,6 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 "display showScrollableModalWebView (has a safeArea but don't have a header)"),
             onPressed: () => showScrollableModalWebView(
                 context: context,
+                scrollable: true,
                 backgroundColor: Colors.blue,
                 controller: controller,
                 initialChildSize: 0.96,
