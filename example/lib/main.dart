@@ -40,8 +40,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Expanded(child: Container()),
           TextButton(
             child: const Text(
                 "display showScrollableModalWebView (has a header and a safeArea)"),
@@ -75,7 +75,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       BorderRadius.vertical(top: Radius.circular(10.0)),
                 )),
           ),
-          Expanded(child: Container()),
           TextButton(
             child: const Text(
                 "display showScrollableModalWebView (has a header but don't have a safeArea)"),
@@ -101,7 +100,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       BorderRadius.vertical(top: Radius.circular(10.0)),
                 )),
           ),
-          Expanded(child: Container()),
           TextButton(
             child: const Text(
                 "display showScrollableModalWebView (has a safeArea but don't have a header)"),
@@ -117,7 +115,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       BorderRadius.vertical(top: Radius.circular(10.0)),
                 )),
           ),
-          Expanded(child: Container()),
           TextButton(
             child: const Text(
                 "display showScrollableModalWebView (don't have a header and safeArea)"),
@@ -132,7 +129,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       BorderRadius.vertical(top: Radius.circular(10.0)),
                 )),
           ),
-          Expanded(child: Container()),
         ],
       ),
     );
