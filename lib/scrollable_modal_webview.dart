@@ -15,8 +15,9 @@ void showScrollableModalWebView({
   double initialChildSize = 1.0,
   ShapeBorder? shape,
   Color? backgroundColor,
+  required bool platform,
 }) {
-  if (!(Platform.isIOS || Platform.isAndroid)) {
+  if (!(platform == Platform.isIOS || platform == Platform.isAndroid)) {
     throw Exception('This OS is not supported');
   }
   final double statusBarHeight = MediaQuery.of(context).padding.top;
@@ -53,7 +54,7 @@ class ScrollableModalBottomSheet extends StatelessWidget {
     required this.scrollable,
     required this.url,
     required this.statusBarHeight,
-  }) : super(key: key);
+  }) : super(key: const ValueKey("webView"));
   @override
   Widget build(BuildContext context) {
     final double deviceHeight = MediaQuery.of(context).size.height;
@@ -74,7 +75,10 @@ class ScrollableModalBottomSheet extends StatelessWidget {
                     physics: scrollable
                         ? null
                         : const NeverScrollableScrollPhysics(),
-                    child: ModalWebView(controller: controller, url: url),
+                    child: ModalWebView(
+                      controller: controller,
+                      url: url,
+                    ),
                   ),
                 ),
               ),
