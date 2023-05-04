@@ -69,18 +69,27 @@ class ScrollableModalBottomSheet extends StatelessWidget {
               if (isSafeAreaZone) SizedBox(height: statusBarHeight),
               if (header != null) header!,
               Expanded(
-                child: Container(
-                  color: Colors.white,
-                  child: SingleChildScrollView(
-                    physics: scrollable
-                        ? null
-                        : const NeverScrollableScrollPhysics(),
-                    child: ModalWebView(
-                      controller: controller,
-                      url: url,
+                child: LayoutBuilder(builder:
+                    (BuildContext context, BoxConstraints constraints) {
+                  return Container(
+                    color: Colors.white,
+                    child: SingleChildScrollView(
+                      physics: scrollable
+                          ? null
+                          : const NeverScrollableScrollPhysics(),
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          minHeight: constraints.maxHeight,
+                          maxHeight: constraints.maxHeight,
+                        ),
+                        child: ModalWebView(
+                          controller: controller,
+                          url: url,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
+                  );
+                }),
               ),
             ],
           );
